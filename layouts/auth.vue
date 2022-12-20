@@ -1,13 +1,11 @@
 <script lang="ts">
 import Header from '@/components/common/navigation/Header.vue'
-import Footer from '@/components/common/navigation/Footer.vue'
 
 export default {
-  name: 'DefaultLayout',
+  name: 'Auth',
 
   components: {
     Header,
-    Footer,
   },
 
   data: () => ({}),
@@ -17,9 +15,6 @@ export default {
 <template>
   <v-app>
     <Header />
-    <v-main>
-      <Nuxt />
-    </v-main>
-    <Footer />
+    <Nuxt />
   </v-app>
 </template>
