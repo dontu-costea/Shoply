@@ -1,35 +1,41 @@
 <script lang="ts">
 export default {
-  name: 'Login',
+  name: 'Register',
 
   layout: 'auth',
 
   data: () => ({
     model: {
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
+      roles: ['user'],
     },
-    error: 'Email or password are not correct',
+    error: 'Introduce data correctly',
     showPassword: false,
+    nameRules: [(v: string) => !!v || 'This field is required'],
     emailRules: [
-      (v: any) => !!v || 'Email is required',
-      (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',
+      (v: string) => !!v || 'Email is required',
+      (v: string) => /.+@.+/.test(v) || 'E-mail must be valid',
     ],
     passwordRules: [
-      (v: any) => !!v || 'Password is required',
-      (v: any) => (v && v.length >= 8) || 'Password must have 8+ characters',
+      (v: string) => !!v || 'Password is required',
+      (v: string) => (v && v.length >= 8) || 'Password must have 8+ characters',
     ],
     showPopup: false,
   }),
 
   methods: {
-    async login() {
+    async register() {
       try {
+        await this.$axios.post('/api/auth/register', this.model)
         await this.$auth.loginWith('local', {
           data: this.model,
         })
         await this.$router.push('/')
       } catch (e) {
+        console.log(e)
         this.showPopup = true
       }
     },
@@ -42,12 +48,31 @@ export default {
     <v-main>
       <v-container>
         <v-row class="mt-4">
-          <v-col
-            ><v-img :src="require('@/assets/img/login-img.png')"></v-img
-          ></v-col>
           <v-col class="form__block">
-            <form @submit.prevent="login" class="form">
-              <span class="form__title">LOGIN</span>
+            <form @submit.prevent="register" class="form">
+              <span class="form__title">Register Now</span>
+              <v-text-field
+                v-model="model.firstName"
+                :rules="nameRules"
+                label="First name"
+                filled
+                rounded
+                dense
+                background-color="#F3F6FF"
+                prepend-inner-icon="mdi-account-outline"
+                class="form__input"
+              ></v-text-field>
+              <v-text-field
+                v-model="model.lastName"
+                :rules="nameRules"
+                label="Last name"
+                filled
+                rounded
+                dense
+                background-color="#F3F6FF"
+                prepend-inner-icon="mdi-account-outline"
+                class="form__input"
+              ></v-text-field>
               <v-text-field
                 v-model="model.email"
                 :rules="emailRules"
@@ -73,25 +98,30 @@ export default {
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
-              <NuxtLink to="#" class="forgot__password"
-                >Forgot password?</NuxtLink
+              <v-btn
+                rounded
+                elevation="0"
+                class="form__button text-capitalize"
+                type="submit"
+                >Register</v-btn
               >
-              <v-btn rounded elevation="0" class="form__button" type="submit"
-                >Login</v-btn
-              >
-              <span class="create__account"
-                >Don't have an account?
-                <NuxtLink to="/register" class="register"
-                  >Register now!</NuxtLink
+              <span class="login"
+                >Do you have already an account?
+                <NuxtLink to="/login" class="login__link"
+                  >Login!</NuxtLink
                 ></span
               >
             </form>
           </v-col>
+          <v-col
+            ><v-img :src="require('@/assets/img/login-img.png')"></v-img
+          ></v-col>
         </v-row>
       </v-container>
     </v-main>
-
-    <popup @close="showPopup = false" :error="error" v-if="showPopup" />
+    <Transition name="popup">
+      <popup @close="showPopup = false" :error="error" v-if="showPopup" />
+    </Transition>
   </v-app>
 </template>
 
@@ -133,11 +163,11 @@ export default {
       font-size: 20px;
       line-height: 24px;
     }
-    .create__account {
+    .login {
       font-size: 16px;
       line-height: 19px;
       color: #334756;
-      .register {
+      &__link {
         color: #616467;
       }
     }

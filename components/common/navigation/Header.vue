@@ -1,12 +1,26 @@
 <script>
 export default {
   name: 'Header',
-  data: () => ({}),
+  data: () => ({
+    isAuth: false,
+  }),
+
+  created() {
+    this.isAuth = this.$auth.loggedIn
+  },
+
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      await this.$router.push('/')
+      this.isAuth = false
+    },
+  },
 }
 </script>
 
 <template>
-  <v-app-bar fixed app elevation="0" height="90" color="#F8F8F8">
+  <v-app-bar fixed app elevation="3" height="90" color="#F8F8F8">
     <v-container class="header">
       <NuxtLink to="/" class="logo"><span>Shoply.</span></NuxtLink>
       <div class="menu">
@@ -17,19 +31,48 @@ export default {
         <NuxtLink to="/about" class="menu__item">About</NuxtLink>
       </div>
       <div class="cart_menu">
-        <NuxtLink to="/cart" class="link"
+        <NuxtLink to="/cart" class="link mr-3"
           ><v-icon size="27">mdi-cart-outline</v-icon></NuxtLink
         >
-        <NuxtLink to="/login" class="link"
-          ><v-btn
-            tile
-            color="#211F1C"
-            class="text-capitalize login__btn"
+
+        <div v-if="isAuth">
+          <span>
+            {{ `${$auth.user.firstName} ${$auth.user.lastName}` }}
+          </span>
+          <v-btn
+            @click="logout"
+            elevation="0"
+            class="text-capitalize logout__btn"
+            color="#746F6C"
             width="85"
             height="32"
-            >Login</v-btn
-          ></NuxtLink
-        >
+            tile
+            >Logout</v-btn
+          >
+        </div>
+
+        <div v-else>
+          <NuxtLink to="/login" class="link"
+            ><v-btn
+              tile
+              color="#211F1C"
+              class="text-capitalize login__btn"
+              width="88"
+              height="33"
+              >Login</v-btn
+            ></NuxtLink
+          >
+          <NuxtLink to="/register" class="link"
+            ><v-btn
+              tile
+              color="#746F6C"
+              class="text-capitalize login__btn ml-1"
+              width="88"
+              height="33"
+              >Register</v-btn
+            ></NuxtLink
+          >
+        </div>
       </div>
     </v-container>
   </v-app-bar>
@@ -64,12 +107,25 @@ export default {
       color: #000;
     }
   }
-  .login__btn {
-    color: white;
-    margin-left: 35px;
-  }
-  .link {
-    text-decoration: none;
+  .cart_menu {
+    display: flex;
+    align-items: center;
+    font-family: Regular;
+    font-weight: bold;
+    .login__btn {
+      font-size: 16px;
+      color: white;
+      border-radius: 2px;
+    }
+    .link {
+      text-decoration: none;
+    }
+    .logout__btn {
+      font-size: 16px;
+      color: white;
+      margin-left: 3px;
+      border-radius: 2px;
+    }
   }
 }
 .active {

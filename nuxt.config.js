@@ -24,7 +24,12 @@ export default {
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -39,12 +44,32 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://shoply-api.nanoit.dev',
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: "accessToken",
+          global: true
+        },
+        endpoints: {
+          login: {url: "/api/auth/login", method: "post", propertyName: "data.token"},
+          user: {url: `/api/auth/user-info`, method: "get"},
+          logout: {url: "/api/auth/logout", method: "post"}
+        },
+        user: {
+          property: false
+        }
+      }
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

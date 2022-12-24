@@ -1,14 +1,6 @@
 <script lang="ts">
-import Header from '@/components/common/navigation/Header.vue'
-import Footer from '@/components/common/navigation/Footer.vue'
-
 export default {
   name: 'DefaultLayout',
-
-  components: {
-    Header,
-    Footer,
-  },
 
   data: () => ({}),
 }

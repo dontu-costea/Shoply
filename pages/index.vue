@@ -4,4 +4,12 @@ export default {
 }
 </script>
 
-<template></template>
+<template>
+  <div>
+    <MainBanner />
+    <Partners />
+    <MainProducts />
+    <Benefits />
+    <CustomersReview />
+  </div>
+</template>
