@@ -126,6 +126,7 @@ export default {
       </v-row>
       <div class="button__block">
         <v-btn
+          @click="$router.push('/products')"
           class="text-capitalize button"
           elevation="0"
           color="#393D45"

@@ -24,11 +24,17 @@ export default {
     <v-container class="header">
       <NuxtLink to="/" class="logo"><span>Shoply.</span></NuxtLink>
       <div class="menu">
-        <NuxtLink to="/" class="menu__item active">Home</NuxtLink>
+        <NuxtLink to="/" exact-active-class="active" class="menu__item"
+          >Home</NuxtLink
+        >
         <span>/</span>
-        <NuxtLink to="/products" class="menu__item">Products</NuxtLink>
+        <NuxtLink to="/products" active-class="active" class="menu__item"
+          >Products</NuxtLink
+        >
         <span>/</span>
-        <NuxtLink to="/about" class="menu__item">About</NuxtLink>
+        <NuxtLink to="/about" active-class="active" class="menu__item"
+          >About</NuxtLink
+        >
       </div>
       <div class="cart_menu">
         <NuxtLink to="/cart" class="link mr-3"
@@ -131,5 +137,6 @@ export default {
 .active {
   font-weight: 700;
   border-bottom: 1px solid #393d45;
+  transition: 0.3s all ease;
 }
 </style>
