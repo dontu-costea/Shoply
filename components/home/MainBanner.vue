@@ -14,7 +14,9 @@ export default {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
             nibh erat
           </div>
-          <v-btn class="text-capitalize button">Show Now</v-btn>
+          <v-btn nuxt :to="`/products/7`" class="text-capitalize button"
+            >Show Now</v-btn
+          >
         </v-col>
         <v-col>
           <v-img

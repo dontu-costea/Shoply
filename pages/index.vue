@@ -11,5 +11,6 @@ export default {
     <MainProducts />
     <Benefits />
     <CustomersReview />
+    <Popup />
   </div>
 </template>

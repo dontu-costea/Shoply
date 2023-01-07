@@ -1,20 +1,12 @@
 <script lang="ts">
 export default {
   name: 'Popup',
-
-  beforeDestroy() {
-    if (!this.$store.getters['modules/popup/getKeepPopup']) {
-      this.$store.dispatch('modules/popup/hidePopup')
-    } else {
-      this.$store.dispatch('modules/popup/keepPopup', false)
-    }
-  },
 }
 </script>
 
 <template>
   <v-snackbar
-    :value="$store.getters['modules/popup/getShowPopup']"
+    :value="$store.getters['modules/popup/getShowWelcomePopup']"
     @input="$store.dispatch('modules/popup/hidePopup')"
     :right="$store.getters['modules/popup/getRight']"
     :top="$store.getters['modules/popup/getTop']"

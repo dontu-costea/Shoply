@@ -1,6 +1,10 @@
 <script lang="ts">
+import * as _ from 'lodash'
+
 export default {
   name: 'Register',
+
+  middleware: 'loggedIn',
 
   layout: 'auth',
 
@@ -12,7 +16,6 @@ export default {
       password: '',
       roles: ['user'],
     },
-    error: 'Introduce data correctly',
     showPassword: false,
     nameRules: [(v: string) => !!v || 'This field is required'],
     emailRules: [
@@ -33,10 +36,18 @@ export default {
         await this.$auth.loginWith('local', {
           data: this.model,
         })
-        await this.$router.push('/')
-      } catch (e) {
-        console.log(e)
-        this.showPopup = true
+        await this.$store.dispatch('modules/popup/keepPopup', true)
+        await this.$store.dispatch('modules/popup/showPopup', {
+          message: `Welcome ${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
+          color: 'primary',
+          top: true,
+        })
+      } catch (e: any) {
+        this.$store.dispatch('modules/popup/showPopup', {
+          message: e.response.data.message,
+          color: 'error',
+          right: true,
+        })
       }
     },
   },
@@ -119,9 +130,7 @@ export default {
         </v-row>
       </v-container>
     </v-main>
-    <Transition name="popup">
-      <popup @close="showPopup = false" :error="error" v-if="showPopup" />
-    </Transition>
+    <Popup :message="popupMessage" :color="'error'" />
   </v-app>
 </template>
 

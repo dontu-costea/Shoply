@@ -1,16 +1,19 @@
 <script lang="ts">
+import * as _ from 'lodash'
+
 export default {
   name: 'Login',
+
+  middleware: 'loggedIn',
 
   layout: 'auth',
 
   data: () => ({
     model: {
-      email: '',
-      password: '',
+      email: '' as String,
+      password: '' as String,
     },
-    error: 'Email or password are not correct',
-    showPassword: false,
+    showPassword: false as Boolean,
     emailRules: [
       (v: any) => !!v || 'Email is required',
       (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',
@@ -19,7 +22,6 @@ export default {
       (v: any) => !!v || 'Password is required',
       (v: any) => (v && v.length >= 8) || 'Password must have 8+ characters',
     ],
-    showPopup: false,
   }),
 
   methods: {
@@ -28,9 +30,18 @@ export default {
         await this.$auth.loginWith('local', {
           data: this.model,
         })
-        await this.$router.push('/')
-      } catch (e) {
-        this.showPopup = true
+        await this.$store.dispatch('modules/popup/keepPopup', true)
+        await this.$store.dispatch('modules/popup/showPopup', {
+          message: `Welcome ${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
+          color: 'primary',
+          top: true,
+        })
+      } catch (e: any) {
+        this.$store.dispatch('modules/popup/showPopup', {
+          message: e.response.data.message,
+          color: 'error',
+          right: true,
+        })
       }
     },
   },
@@ -91,7 +102,7 @@ export default {
       </v-container>
     </v-main>
 
-    <popup @close="showPopup = false" :error="error" v-if="showPopup" />
+    <Popup />
   </v-app>
 </template>
 

@@ -5,8 +5,21 @@ export default {
     isAuth: false,
   }),
 
-  created() {
+  mounted() {
     this.isAuth = this.$auth.loggedIn
+    if (this.$auth.loggedIn) {
+      this.$store.dispatch('modules/cart/getCart')
+    }
+  },
+
+  computed: {
+    cartAmount() {
+      let cart = this.$store.getters['modules/cart/getCart']
+      if (!cart.length) {
+        return '0'
+      }
+      return cart.length
+    },
   },
 
   methods: {
@@ -37,11 +50,18 @@ export default {
         >
       </div>
       <div class="cart_menu">
-        <NuxtLink to="/cart" class="link mr-3"
-          ><v-icon size="27">mdi-cart-outline</v-icon></NuxtLink
-        >
-
         <div v-if="isAuth">
+          <NuxtLink to="/cart" class="link mr-5">
+            <v-badge
+              color="#FF6565"
+              overlap
+              :content="cartAmount"
+              bordered
+              offset-x="8"
+            >
+              <v-icon size="27">mdi-cart-outline</v-icon>
+            </v-badge>
+          </NuxtLink>
           <span>
             {{ `${$auth.user.firstName} ${$auth.user.lastName}` }}
           </span>
