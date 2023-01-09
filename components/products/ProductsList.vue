@@ -26,7 +26,6 @@ export default {
           color: 'success',
           right: true,
         })
-        console.log(this.$store.getters['modules/popup/getTop'])
       } catch (e: any) {
         console.log(e)
       }

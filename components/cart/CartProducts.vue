@@ -5,29 +5,17 @@ import * as _ from 'lodash'
 export default {
   name: 'CartProducts',
 
-  data: () => ({
-    cart: [] as [],
-    popupMessage: 'Product was deleted',
-  }),
-
-  mounted() {
-    this.getCart()
+  computed: {
+    cart() {
+      return this.$store.getters['modules/cart/getCart']
+    },
   },
 
   methods: {
-    async getCart() {
-      try {
-        await this.$store.dispatch('modules/cart/getCart')
-        this.cart = this.$store.getters['modules/cart/getCart']
-      } catch (e: any) {
-        console.log(e)
-      }
-    },
-
     increaseQuantity: _.debounce(async function (id: number) {
       try {
         await api.cart().increaseQuantity(id)
-        await this.getCart()
+        await this.$store.dispatch('modules/cart/getCart')
       } catch (e: any) {
         console.log(e)
       }
@@ -36,7 +24,7 @@ export default {
     reduceQuantity: _.debounce(async function (id: number) {
       try {
         await api.cart().reduceQuantity(id)
-        await this.getCart()
+        await this.$store.dispatch('modules/cart/getCart')
       } catch (e: any) {
         console.log(e)
       }
@@ -45,7 +33,7 @@ export default {
     deleteProduct: _.debounce(async function (id: number) {
       try {
         await api.cart().deleteProduct(id)
-        await this.getCart()
+        await this.$store.dispatch('modules/cart/getCart')
         this.$store.dispatch('modules/popup/showPopup', {
           message: 'Product was deleted',
           color: 'error',
@@ -125,7 +113,7 @@ export default {
       <CartPrice :cart="cart" />
     </div>
     <div v-else class="no-products">Here are no products yet</div>
-    <Popup :message="popupMessage" :color="'error'" />
+    <Popup />
   </div>
 </template>
 
