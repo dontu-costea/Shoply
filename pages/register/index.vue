@@ -1,5 +1,6 @@
 <script lang="ts">
 import * as _ from 'lodash'
+import api from '@/api'
 
 export default {
   name: 'Register',
@@ -30,14 +31,14 @@ export default {
   }),
 
   methods: {
-    async register() {
+    register: _.debounce(async function () {
       try {
-        await this.$axios.post('/api/auth/register', this.model)
+        await api.auth().register(this.model)
         await this.$auth.loginWith('local', {
           data: this.model,
         })
-        await this.$store.dispatch('modules/popup/keepPopup', true)
-        await this.$store.dispatch('modules/popup/showPopup', {
+        this.$store.dispatch('modules/popup/keepPopup', true)
+        this.$store.dispatch('modules/popup/showPopup', {
           message: `Welcome ${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
           color: 'primary',
           top: true,
@@ -49,7 +50,7 @@ export default {
           right: true,
         })
       }
-    },
+    }, 200),
   },
 }
 </script>
@@ -130,7 +131,7 @@ export default {
         </v-row>
       </v-container>
     </v-main>
-    <Popup :message="popupMessage" :color="'error'" />
+    <Popup />
   </v-app>
 </template>
 

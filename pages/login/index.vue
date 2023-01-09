@@ -25,13 +25,13 @@ export default {
   }),
 
   methods: {
-    async login() {
+    login: _.debounce(async function () {
       try {
         await this.$auth.loginWith('local', {
           data: this.model,
         })
-        await this.$store.dispatch('modules/popup/keepPopup', true)
-        await this.$store.dispatch('modules/popup/showPopup', {
+        this.$store.dispatch('modules/popup/keepPopup', true)
+        this.$store.dispatch('modules/popup/showPopup', {
           message: `Welcome ${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
           color: 'primary',
           top: true,
@@ -43,7 +43,7 @@ export default {
           right: true,
         })
       }
-    },
+    }, 200),
   },
 }
 </script>

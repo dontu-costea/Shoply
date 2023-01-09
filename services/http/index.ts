@@ -54,10 +54,10 @@ export class HttpService {
 		try {
 			const response = await this.axios.post(url, params);
 	
-			return response.data;
+			return response;
 		} catch (e: any) {
 			console.log(e);
-			throw e.data;
+			throw e;
 		}
 	}
 
