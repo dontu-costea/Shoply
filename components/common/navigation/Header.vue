@@ -1,12 +1,8 @@
 <script>
 export default {
   name: 'Header',
-  data: () => ({
-    isAuth: false,
-  }),
 
   mounted() {
-    this.isAuth = this.$auth.loggedIn
     if (this.$auth.loggedIn) {
       this.$store.dispatch('modules/cart/getCart')
     }
@@ -50,7 +46,7 @@ export default {
         >
       </div>
       <div class="cart_menu">
-        <div v-if="isAuth">
+        <div v-if="$auth.loggedIn">
           <NuxtLink to="/cart" class="link mr-5">
             <v-badge
               color="#FF6565"
