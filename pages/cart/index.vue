@@ -1,9 +1,8 @@
 <script lang="ts">
-export default {
-  name: 'Cart',
+import { Component, Vue } from 'nuxt-property-decorator'
 
-  middleware: 'cart',
-}
+@Component({ middleware: ['cart'] })
+export default class Cart extends Vue {}
 </script>
 
 <template>
@@ -12,5 +11,3 @@ export default {
     <CartProducts />
   </v-container>
 </template>
-
-<style scoped lang="scss"></style>

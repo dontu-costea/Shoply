@@ -1,56 +1,4 @@
-<script lang="ts">
-import api from '@/api'
-import _ from 'lodash'
-
-export default {
-  name: 'ProductView',
-
-  data: () => ({
-    product: {} as Object,
-    category: '' as string,
-    amount: 1 as number,
-  }),
-
-  mounted() {
-    this.loadData()
-  },
-
-  methods: {
-    async loadData() {
-      try {
-        this.product = await api.products().getProduct(this.$route.params.id)
-        this.category = await api
-          .categories()
-          .getCategory(this.product.categoryId)
-      } catch (e: any) {
-        console.log(e)
-      }
-    },
-
-    addToCart: _.debounce(async function () {
-      try {
-        await api.cart().addToCart({
-          productId: this.product.id,
-          quantity: this.amount,
-        })
-        this.$store.dispatch('modules/cart/getCart')
-        this.$store.dispatch('modules/popup/showPopup', {
-          message: 'Product was added to cart',
-          color: 'success',
-          right: true,
-        })
-      } catch (e: any) {
-        console.log(e)
-        this.$store.dispatch('modules/popup/showPopup', {
-          message: 'You need to log in to add to cart',
-          color: 'error',
-          right: true,
-        })
-      }
-    }, 500),
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <v-container>
@@ -96,7 +44,7 @@ export default {
             >
           </div>
           <v-btn
-            @click="addToCart"
+            @click="addToCart()"
             elevation="0"
             color="#211F1C"
             class="add text-capitalize"

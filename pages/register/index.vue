@@ -1,59 +1,4 @@
-<script lang="ts">
-import * as _ from 'lodash'
-import api from '@/api'
-
-export default {
-  name: 'Register',
-
-  middleware: 'loggedIn',
-
-  layout: 'auth',
-
-  data: () => ({
-    model: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      roles: ['user'],
-    },
-    showPassword: false,
-    nameRules: [(v: string) => !!v || 'This field is required'],
-    emailRules: [
-      (v: string) => !!v || 'Email is required',
-      (v: string) => /.+@.+/.test(v) || 'E-mail must be valid',
-    ],
-    passwordRules: [
-      (v: string) => !!v || 'Password is required',
-      (v: string) => (v && v.length >= 8) || 'Password must have 8+ characters',
-    ],
-    showPopup: false,
-  }),
-
-  methods: {
-    register: _.debounce(async function () {
-      try {
-        await api.auth().register(this.model)
-        await this.$auth.loginWith('local', {
-          data: this.model,
-        })
-        this.$store.dispatch('modules/popup/keepPopup', true)
-        this.$store.dispatch('modules/popup/showPopup', {
-          message: `Welcome ${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
-          color: 'primary',
-          top: true,
-        })
-      } catch (e: any) {
-        this.$store.dispatch('modules/popup/showPopup', {
-          message: e.response.data.message,
-          color: 'error',
-          right: true,
-        })
-      }
-    }, 200),
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <v-app>
@@ -61,7 +6,7 @@ export default {
       <v-container>
         <v-row class="mt-4">
           <v-col class="form__block">
-            <form @submit.prevent="register" class="form">
+            <form @submit.prevent="register()" class="form">
               <span class="form__title">Register Now</span>
               <v-text-field
                 v-model="model.firstName"

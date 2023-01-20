@@ -1,28 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'CartPrice',
-
-  props: {
-    cart: Array,
-  },
-
-  computed: {
-    calculateSum() {
-      let sum = 0
-      this.cart?.forEach(function (item: any) {
-        sum += Number(item.product.price) * Number(item.quantity)
-      })
-      return sum
-    },
-  },
-
-  methods: {
-    test() {
-      console.log(this.cart)
-    },
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <div class="cart-price">
@@ -47,7 +23,6 @@ export default {
       <v-btn elevation="0" class="button text-capitalize mr-5">Close</v-btn>
       <v-btn
         elevation="0"
-        @click="test"
         class="button text-capitalize white--text"
         color="#393D45"
         >Check Out</v-btn

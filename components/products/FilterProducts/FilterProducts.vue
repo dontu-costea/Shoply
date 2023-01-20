@@ -1,29 +1,4 @@
-<script lang="ts">
-import api from '@/api'
-
-export default {
-  name: 'FilterProducts',
-
-  data: () => ({
-    categories: [] as any,
-    showLess: true,
-  }),
-
-  mounted() {
-    this.getCategories()
-  },
-
-  methods: {
-    async getCategories() {
-      try {
-        this.categories = await api.categories().getCategories()
-      } catch (e: any) {
-        console.log(e)
-      }
-    },
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <div>

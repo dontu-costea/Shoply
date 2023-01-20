@@ -1,32 +1,4 @@
-<script>
-export default {
-  name: 'Header',
-
-  mounted() {
-    if (this.$auth.loggedIn) {
-      this.$store.dispatch('modules/cart/getCart')
-    }
-  },
-
-  computed: {
-    cartAmount() {
-      let cart = this.$store.getters['modules/cart/getCart']
-      if (!cart.length) {
-        return '0'
-      }
-      return cart.length
-    },
-  },
-
-  methods: {
-    async logout() {
-      await this.$auth.logout()
-      await this.$router.push('/')
-      this.isAuth = false
-    },
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <v-app-bar fixed app elevation="3" height="90" color="#F8F8F8">
@@ -59,7 +31,7 @@ export default {
             </v-badge>
           </NuxtLink>
           <span>
-            {{ `${$auth.user.firstName} ${$auth.user.lastName}` }}
+            {{ `${$auth.user?.firstName} ${$auth.user?.lastName}` }}
           </span>
           <v-btn
             @click="logout"

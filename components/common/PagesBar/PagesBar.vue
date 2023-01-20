@@ -1,13 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'PagesBar',
-
-  props: {
-    activePage: String,
-    page: String,
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <div>

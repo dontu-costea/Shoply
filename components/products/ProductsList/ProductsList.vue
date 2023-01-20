@@ -1,38 +1,4 @@
-<script lang="ts">
-import api from '@/api'
-import * as _ from 'lodash'
-
-export default {
-  name: 'ProductsList',
-
-  props: {
-    products: Array,
-  },
-
-  data: () => ({
-    searchValue: '' as String,
-  }),
-
-  methods: {
-    addToCart: _.debounce(async function (id: number) {
-      try {
-        await api.cart().addToCart({
-          productId: id,
-          quantity: 1,
-        })
-        this.$store.dispatch('modules/cart/getCart')
-        this.$store.dispatch('modules/popup/showPopup', {
-          message: 'Product was added to cart',
-          color: 'success',
-          right: true,
-        })
-      } catch (e: any) {
-        console.log(e)
-      }
-    }, 200),
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <div>
@@ -65,7 +31,7 @@ export default {
             color="#211F1C"
             class="text-capitalize product__btn"
             nuxt
-            :to="`/products/${product.id}`"
+            :to="`/products/product/${product.id}`"
             >Detail
           </v-btn>
           <v-btn

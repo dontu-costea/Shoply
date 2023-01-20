@@ -1,16 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'Popup',
-
-  beforeDestroy() {
-    if (!this.$store.getters['modules/popup/getKeepPopup']) {
-      this.$store.dispatch('modules/popup/hidePopup')
-    } else {
-      this.$store.dispatch('modules/popup/keepPopup', false)
-    }
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <v-snackbar

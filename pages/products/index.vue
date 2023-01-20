@@ -1,40 +1,4 @@
-<script lang="ts">
-import api from '@/api'
-
-export default {
-  name: 'Products',
-
-  data: () => ({
-    totalPages: 0 as number,
-    params: {
-      page: 1,
-      pageSize: 8,
-    },
-    products: [] as any,
-  }),
-
-  mounted() {
-    this.loadData()
-  },
-
-  methods: {
-    async loadData() {
-      try {
-        const { data, meta } = await api.products().getProducts(this.params)
-        this.products = data
-        this.totalPages = meta.total
-      } catch (e: any) {
-        console.log(e)
-      }
-    },
-
-    changePage() {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      this.loadData()
-    },
-  },
-}
-</script>
+<script src="./index.ts"></script>
 
 <template>
   <v-container>
