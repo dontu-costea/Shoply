@@ -1,6 +1,5 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import * as _ from 'lodash'
-import api from '@/api'
 
 @Component({ layout: 'auth', middleware: ['loggedIn'] })
 export default class Register extends Vue {
@@ -25,7 +24,7 @@ export default class Register extends Vue {
 
   register = _.debounce(async function () {
     try {
-      await api.auth().register(this.model)
+      await this.$axios.post('/auth/register', this.model)
       await this.$auth.loginWith('local', {
         data: this.model,
       })

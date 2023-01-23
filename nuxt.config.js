@@ -70,7 +70,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://shoply-api.nanoit.dev',
+    baseURL: 'https://shoply-api.nanoit.dev/api',
   },
 
   auth: {
@@ -81,9 +81,9 @@ export default {
           global: true
         },
         endpoints: {
-          login: {url: "/api/auth/login", method: "post", propertyName: "data.token"},
-          user: {url: `/api/auth/user-info`, method: "get"},
-          logout: {url: "/api/auth/logout", method: "post"}
+          login: {url: "/auth/login", method: "post", propertyName: "data.token"},
+          user: {url: `/auth/user-info`, method: "get"},
+          logout: {url: "/auth/logout", method: "post"}
         },
         user: {
           property: false

@@ -1,5 +1,4 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import api from '@/api'
 import * as _ from 'lodash'
 
 @Component
@@ -11,7 +10,7 @@ export default class ProductsList extends Vue {
 
   addToCart = _.debounce(async function (id: number) {
     try {
-      await api.cart().addToCart({
+      await this.$axios.post('/cart', {
         productId: id,
         quantity: 1,
       })

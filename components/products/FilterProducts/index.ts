@@ -12,7 +12,7 @@ export default class FilterProducts extends Vue {
 
   async getCategories() {
     try {
-      this.categories = await api.categories().getCategories()
+      this.categories = await this.$axios.$get('/categories')
     } catch (e: any) {
       console.log(e)
     }

@@ -1,5 +1,3 @@
-import api from "@/api"
-
 export const state = () => ({
   cart:[] as []
 })
@@ -16,7 +14,7 @@ export const mutations = {
 export const actions = {
   async getCart({commit}: any, payload: any) {
     try {
-      const { data } = await api.cart().getCart()
+      const { data }  = await this.$axios.$get('/cart')
       commit("setCart", data)
     } catch (e: any) {
       console.log(e)

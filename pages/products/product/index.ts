@@ -1,5 +1,4 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import api from '@/api'
 import _ from 'lodash'
 
 @Component
@@ -14,10 +13,8 @@ export default class ProductView extends Vue {
 
   async loadData() {
     try {
-      this.product = await api.products().getProduct(this.$route.params.id)
-      this.category = await api
-        .categories()
-        .getCategory(this.product.categoryId)
+      this.product = await this.$axios.$get(`/products/${this.$route.params.id}`)
+      this.category = await this.$axios.$get(`/categories/${this.product.categoryId}`)
     } catch (e: any) {
       console.log(e)
     }
@@ -25,7 +22,7 @@ export default class ProductView extends Vue {
 
   addToCart = _.debounce(async function () {
     try {
-      await api.cart().addToCart({
+      await this.$axios.post('/cart', {
         productId: this.product.id,
         quantity: this.amount,
       })

@@ -1,5 +1,4 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import api from '@/api'
 
 @Component
 export default class Products extends Vue {
@@ -16,7 +15,7 @@ export default class Products extends Vue {
 
   async loadData() {
     try {
-      const { data, meta } = await api.products().getProducts(this.params)
+      const { data, meta } = await this.$axios.$get('/products', {params: this.params})
       this.products = data
       this.totalPages = meta.total
     } catch (e: any) {

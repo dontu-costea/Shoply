@@ -1,5 +1,4 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import api from '@/api'
 import * as _ from 'lodash'
 
 @Component
@@ -10,7 +9,7 @@ export default class CartProducts extends Vue {
 
   increaseQuantity = _.debounce(async function (id: number) {
     try {
-      await api.cart().increaseQuantity(id)
+      await this.$axios.post(`/cart/${id}/increase-quantity`)
       await this.$store.dispatch('modules/cart/getCart')
     } catch (e: any) {
       console.log(e)
@@ -19,7 +18,7 @@ export default class CartProducts extends Vue {
 
   reduceQuantity = _.debounce(async function (id: number) {
     try {
-      await api.cart().reduceQuantity(id)
+      await this.$axios.post(`/cart/${id}/reduce-quantity`)
       await this.$store.dispatch('modules/cart/getCart')
     } catch (e: any) {
       console.log(e)
@@ -28,7 +27,7 @@ export default class CartProducts extends Vue {
 
   deleteProduct = _.debounce(async function (id: number) {
     try {
-      await api.cart().deleteProduct(id)
+      await this.$axios.delete(`/cart/${id}`)
       await this.$store.dispatch('modules/cart/getCart')
       this.$store.dispatch('modules/popup/showPopup', {
         message: 'Product was deleted',
