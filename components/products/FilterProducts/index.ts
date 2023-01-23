@@ -1,5 +1,4 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import api from '@/api'
 
 @Component
 export default class FilterProducts extends Vue {
