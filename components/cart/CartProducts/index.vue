@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <div>
     <div v-if="cart.length">
@@ -9,7 +7,7 @@
         <v-col class="ml-2">Quantity</v-col>
         <v-col class="text-right">Delete</v-col>
       </v-row>
-      <v-row v-for="product in cart" class="products__list" :key="product.id">
+      <v-row v-for="product in cart" :key="product.id" class="products__list">
         <v-col class="flex-center">
           <div>
             <v-img
@@ -27,37 +25,37 @@
         >
         <v-col class="flex-center">
           <v-btn
-            @click="reduceQuantity(product.id)"
             :disabled="product.quantity < 2"
             elevation="0"
             color="transparent"
             min-width="0"
             width="30px"
             class="details mr-2"
+            @click="reduceQuantity(product.id)"
             >-</v-btn
           >
           <div class="details quantity">{{ product.quantity }}</div>
           <v-btn
-            @click="increaseQuantity(product.id)"
             :disabled="product.quantity > 200"
             elevation="0"
             color="transparent"
             min-width="0"
             width="30px"
             class="details ml-2"
+            @click="increaseQuantity(product.id)"
             >+</v-btn
           >
         </v-col>
         <v-col class="flex-center">
           <v-spacer></v-spacer>
           <v-btn
-            @click="deleteProduct(product.id)"
             elevation="0"
             color="transparent"
             class="delete__btn"
             min-width="0"
             width="40px"
             height="40px"
+            @click="deleteProduct(product.id)"
           >
             <v-icon>mdi-delete-circle-outline</v-icon>
           </v-btn>
@@ -69,6 +67,8 @@
     <Popup />
   </div>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .titles {

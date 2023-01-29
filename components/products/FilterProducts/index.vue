@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <div>
     <div class="filter__title">Filter</div>
@@ -7,31 +5,31 @@
       <div class="filter__item">Product Category</div>
       <div v-if="showLess" class="category__list">
         <v-checkbox
-          dense
           v-for="category in categories.slice(0, 5)"
           :key="category.id"
+          dense
           color="#211F1C"
         >
-          <template v-slot:label
+          <template #label
             ><span class="checkbox">{{ category.name }}</span></template
           >
         </v-checkbox>
-        <v-btn elevation="0" @click="showLess = false" class="text-capitalize"
+        <v-btn elevation="0" class="text-capitalize" @click="showLess = false"
           >Show More <v-icon>mdi-chevron-down</v-icon></v-btn
         >
       </div>
       <div v-else class="category__list">
         <v-checkbox
-          dense
           v-for="category in categories"
           :key="category.id"
+          dense
           color="#211F1C"
         >
-          <template v-slot:label
+          <template #label
             ><span class="checkbox">{{ category.name }}</span></template
           >
         </v-checkbox>
-        <v-btn elevation="0" @click="showLess = true" class="text-capitalize"
+        <v-btn elevation="0" class="text-capitalize" @click="showLess = true"
           >Show Less <v-icon>mdi-chevron-up</v-icon></v-btn
         >
       </div>
@@ -70,6 +68,8 @@
     >
   </div>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 * {

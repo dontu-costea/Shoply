@@ -4,16 +4,17 @@ import { Component, Vue } from 'nuxt-property-decorator'
 export default class Header extends Vue {
   mounted() {
     if (this.$auth.loggedIn) {
-      this.$store.dispatch('modules/cart/getCart')
+      this.$store.dispatch('cart/getCart')
     }
   }
 
   get cartAmount() {
-    let cart = this.$store.getters['modules/cart/getCart']
-    if (!cart.length) {
+    const cart = this.$store.getters['cart/getCart']
+    console.log(cart)
+    if (!cart?.length) {
       return '0'
     }
-    return cart.length
+    return cart.length || '0'
   }
 
   async logout() {

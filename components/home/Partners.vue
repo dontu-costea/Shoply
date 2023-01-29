@@ -1,6 +1,10 @@
 <script lang="ts">
-export default {
-  name: 'Partners',
+import { Component, Vue } from 'nuxt-property-decorator'
+@Component
+export default class Partners extends Vue {
+  get partnersImageSrc(): string {
+    return '/homePage/partners/morgan.png'
+  }
 }
 </script>
 
@@ -10,10 +14,7 @@ export default {
       <div class="block__title">Our Partners</div>
       <v-row class="partners">
         <v-col class="mr-14"
-          ><v-img
-            width="195px"
-            :src="require('@/assets/img/homePage/partners/morgan.png')"
-          ></v-img
+          ><v-img width="195px" :src="partnersImageSrc"></v-img
         ></v-col>
         <v-col class="mx-14"
           ><v-img
@@ -22,10 +23,7 @@ export default {
           ></v-img
         ></v-col>
         <v-col class="mx-14"
-          ><v-img
-            width="192px"
-            :src="require('@/assets/img/homePage/partners/pull&bear.png')"
-          ></v-img
+          ><v-img width="192px" src="/homePage/partners/pull&bear.png"></v-img
         ></v-col>
         <v-col class="ml-14"
           ><v-img

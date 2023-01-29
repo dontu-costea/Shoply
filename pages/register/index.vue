@@ -1,12 +1,10 @@
-<script src="./index.ts"></script>
-
 <template>
   <v-app>
     <v-main>
       <v-container>
         <v-row class="mt-4">
           <v-col class="form__block">
-            <form @submit.prevent="register()" class="form">
+            <form class="form" @submit.prevent="register()">
               <span class="form__title">Register Now</span>
               <v-text-field
                 v-model="model.firstName"
@@ -79,6 +77,8 @@
     <Popup />
   </v-app>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .form__block {

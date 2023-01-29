@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <div class="cart-price">
     <div class="price__block">
@@ -30,6 +28,8 @@
     </div>
   </div>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .cart-price {

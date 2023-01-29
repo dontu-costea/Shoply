@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'About',
-}
-</script>
-
 <template>
   <v-container>
     <PagesBar :active-page="'About'" />
@@ -26,6 +20,14 @@ export default {
     </v-row>
   </v-container>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import { LayoutTypes } from '~/ts/enum'
+
+@Component({ layout: LayoutTypes.Default })
+export default class About extends Vue {}
+</script>
 
 <style scoped lang="scss">
 .about {

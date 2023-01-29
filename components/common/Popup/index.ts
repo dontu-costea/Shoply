@@ -2,11 +2,15 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class Popup extends Vue {
+  get keepPopup(): boolean {
+    return this.$store.getters['popup/getKeepPopup']
+  }
+
   beforeDestroy() {
-    if (!this.$store.getters['modules/popup/getKeepPopup']) {
-      this.$store.dispatch('modules/popup/hidePopup')
+    if (!this.keepPopup) {
+      this.$store.dispatch('popup/hidePopup')
     } else {
-      this.$store.dispatch('modules/popup/keepPopup', false)
+      this.$store.dispatch('popup/keepPopup', false)
     }
   }
 }

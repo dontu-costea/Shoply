@@ -1,7 +1,8 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { LayoutTypes } from '~/ts/enum'
 
-@Component({ middleware: ['cart'] })
+@Component({ layout: LayoutTypes.Default, middleware: ['cart'] })
 export default class Cart extends Vue {}
 </script>
 

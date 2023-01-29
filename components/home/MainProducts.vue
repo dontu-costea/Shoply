@@ -126,12 +126,12 @@ export default {
       </v-row>
       <div class="button__block">
         <v-btn
-          @click="$router.push('/products')"
           class="text-capitalize button"
           elevation="0"
           color="#393D45"
           height="54px"
           width="218px"
+          @click="$router.push('/products')"
           >All products <v-icon class="ml-2">mdi-arrow-right</v-icon></v-btn
         >
       </div>

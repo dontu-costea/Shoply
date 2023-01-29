@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <v-app-bar fixed app elevation="3" height="90" color="#F8F8F8">
     <v-container class="header">
@@ -34,13 +32,13 @@
             {{ `${$auth.user?.firstName} ${$auth.user?.lastName}` }}
           </span>
           <v-btn
-            @click="logout"
             elevation="0"
             class="text-capitalize logout__btn"
             color="#746F6C"
             width="85"
             height="32"
             tile
+            @click="logout"
             >Logout</v-btn
           >
         </div>
@@ -71,6 +69,8 @@
     </v-container>
   </v-app-bar>
 </template>
+
+<script src="./index.ts" lang="ts" />
 
 <style scoped lang="scss">
 .header {

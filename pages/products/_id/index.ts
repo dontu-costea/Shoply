@@ -1,5 +1,6 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import _ from 'lodash'
+import { ApiRoutes } from '~/ts/enum'
 
 @Component
 export default class ProductView extends Vue {
@@ -13,28 +14,32 @@ export default class ProductView extends Vue {
 
   async loadData() {
     try {
-      this.product = await this.$axios.$get(`/products/${this.$route.params.id}`)
-      this.category = await this.$axios.$get(`/categories/${this.product.categoryId}`)
+      this.product = await this.$axios.$get(
+        `/products/${this.$route.params.id}`
+      )
+      this.category = await this.$axios.$get(
+        `${ApiRoutes.Categories}/${this.product.categoryId}`
+      )
     } catch (e: any) {
       console.log(e)
     }
   }
 
-  addToCart = _.debounce(async function () {
+  addToCart = _.debounce(async () => {
     try {
-      await this.$axios.post('/cart', {
+      await this.$axios.post(ApiRoutes.Cart, {
         productId: this.product.id,
         quantity: this.amount,
       })
-      this.$store.dispatch('modules/cart/getCart')
-      this.$store.dispatch('modules/popup/showPopup', {
+      await this.$store.dispatch('cart/getCart')
+      await this.$store.dispatch('popup/showPopup', {
         message: 'Product was added to cart',
         color: 'success',
         right: true,
       })
     } catch (e: any) {
       console.log(e)
-      this.$store.dispatch('modules/popup/showPopup', {
+      await this.$store.dispatch('popup/showPopup', {
         message: 'You need to log in to add to cart',
         color: 'error',
         right: true,

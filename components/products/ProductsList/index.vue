@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <div>
     <v-text-field
@@ -21,7 +19,7 @@
       </div>
     </div>
     <div class="products__list">
-      <div v-for="product in products" class="product__item" :key="product.id">
+      <div v-for="product in products" :key="product.id" class="product__item">
         <v-img
           class="product__img"
           :src="require('@/assets/img/homePage/mainProducts/product2.png')"
@@ -31,14 +29,14 @@
             color="#211F1C"
             class="text-capitalize product__btn"
             nuxt
-            :to="`/products/product/${product.id}`"
+            :to="`/products/${product.id}`"
             >Detail
           </v-btn>
           <v-btn
             v-if="$auth.loggedIn"
-            @click="addToCart(product.id)"
             color="white"
             class="product__cart"
+            @click="addToCart(product.id)"
             ><v-icon size="20">mdi-cart-outline</v-icon></v-btn
           >
         </div>
@@ -52,6 +50,8 @@
     <Popup />
   </div>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .flex {

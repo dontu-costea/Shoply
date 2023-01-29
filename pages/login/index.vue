@@ -1,5 +1,3 @@
-<script src="./index.ts"></script>
-
 <template>
   <v-app>
     <v-main>
@@ -9,7 +7,7 @@
             ><v-img :src="require('@/assets/img/login-img.png')"></v-img
           ></v-col>
           <v-col class="form__block">
-            <form @submit.prevent="login()" class="form">
+            <form class="form" @submit.prevent="login()">
               <span class="form__title">LOGIN</span>
               <v-text-field
                 v-model="model.email"
@@ -57,6 +55,8 @@
     <Popup />
   </v-app>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .form__block {

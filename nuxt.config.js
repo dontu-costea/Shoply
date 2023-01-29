@@ -29,25 +29,16 @@ export default {
       path: '~/components/home', extensions: ['vue'],
     },
     {
-      path: '~/components/products/FilterProducts', extensions: ['vue'],
+      path: '~/components/products', extensions: ['vue'],
     },
     {
-      path: '~/components/products/ProductsList', extensions: ['vue'],
+      path: '~/components/common', extensions: ['vue'],
     },
     {
-      path: '~/components/common/navigation', extensions: ['vue'],
+      path: '~/components/navigation', extensions: ['vue'],
     },
     {
-      path: '~/components/common/PagesBar',  extensions: ['vue'],
-    },
-    {
-      path: '~/components/common/Popup', extensions: ['vue'],
-    },
-    {
-      path: '~/components/cart/CartPrice', extensions: ['vue'],
-    },
-    {
-      path: '~/components/cart/CartProducts', extensions: ['vue'],
+      path: '~/components/cart', extensions: ['vue'],
     },
   ],
 

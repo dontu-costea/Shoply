@@ -1,8 +1,6 @@
-<script src="./index.ts"></script>
-
 <template>
   <v-container>
-    <PagesBar :page="'Products'" :activePage="product.name" />
+    <PagesBar :page="'Products'" :active-page="product.name" />
     <v-row>
       <v-col>
         <v-img
@@ -28,26 +26,26 @@
             <v-btn
               elevation="0"
               :disabled="amount < 2"
-              @click="amount -= 1"
               min-width="0"
               class="amount__item mr-4"
+              @click="amount -= 1"
               >-</v-btn
             >
             <div class="flex-center amount__item">{{ amount }}</div>
             <v-btn
               elevation="0"
               :disabled="amount > 200"
-              @click="amount += 1"
               min-width="0"
               class="amount__item ml-4"
+              @click="amount += 1"
               >+</v-btn
             >
           </div>
           <v-btn
-            @click="addToCart()"
             elevation="0"
             color="#211F1C"
             class="add text-capitalize"
+            @click="addToCart()"
             >Add to cart</v-btn
           >
         </div>
@@ -66,6 +64,8 @@
     <Popup />
   </v-container>
 </template>
+
+<script src="./index.ts"></script>
 
 <style scoped lang="scss">
 .details {

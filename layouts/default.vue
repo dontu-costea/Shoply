@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'DefaultLayout',
-}
-</script>
-
 <template>
   <v-app>
     <Header />
@@ -13,3 +7,10 @@ export default {
     <Footer />
   </v-app>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class DefaultLayout extends Vue {}
+</script>

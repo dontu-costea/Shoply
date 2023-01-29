@@ -5,7 +5,7 @@
     <div class="bar">
       <span class="page">Home</span>
       <v-icon size="28" class="mx-4">mdi-chevron-right</v-icon>
-      <span class="page" v-if="page">{{ page }}</span>
+      <span v-if="page" class="page">{{ page }}</span>
       <v-icon v-if="page" size="28" class="mx-4">mdi-chevron-right</v-icon>
       <span class="page active">{{ activePage }}</span>
     </div>

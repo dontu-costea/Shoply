@@ -1,12 +1,16 @@
 import { Component, Vue } from 'nuxt-property-decorator'
+import { LayoutTypes } from '~/ts/enum'
 
-@Component
+@Component({
+  layout: LayoutTypes.Default,
+})
 export default class Products extends Vue {
   totalPages = 0 as number
   params = {
     page: 1,
     pageSize: 8,
   }
+
   products = [] as any
 
   mounted() {
@@ -15,7 +19,9 @@ export default class Products extends Vue {
 
   async loadData() {
     try {
-      const { data, meta } = await this.$axios.$get('/products', {params: this.params})
+      const { data, meta } = await this.$axios.$get('/products', {
+        params: this.params,
+      })
       this.products = data
       this.totalPages = meta.total
     } catch (e: any) {

@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: 'Footer',
-}
-</script>
-
 <template>
   <v-footer color="#484543">
     <v-container class="footer">
@@ -29,6 +23,8 @@ export default {
     </v-container>
   </v-footer>
 </template>
+
+<script src="./index.ts" />
 
 <style scoped lang="scss">
 .footer {
